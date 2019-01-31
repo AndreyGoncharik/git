@@ -1,1 +1,248 @@
-!
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-16">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Git</title>
+</head>
+<style>
+    body {
+        display: flex; 
+        justify-content: center;
+        background-color: #eeebeb;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, serif;
+
+    }
+    .wrapper	{
+        display: flex; 
+        flex-direction: column;
+        margin: 0 auto;
+        min-height: 100vh;
+        max-width: 800px;
+        width: 100%;
+        background-color: #fff;
+        padding: 50px 35px;
+    }
+
+    .item {
+            display: flex; 
+            flex-direction: column;
+    }
+
+    h3 {
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 40px;
+        margin-top: 33px;
+        margin-bottom: 0px;
+    }
+
+    p {
+        color: #616161;
+        font-size: 16px;
+        margin-top: 5px;
+    }
+
+    pre {
+        font-size: 17px;
+        margin: 0;
+    }
+
+</style>
+<body>
+    
+    <div class="wrapper">
+            <h3 style="font-weight: normal; font-size: 30px;">Команды Git</h3>
+<div class="item">
+                <h3>Определение состояния</h3>
+                <p>status — это еще одна важнейшая команда, которая показывает информацию о текущем состоянии репозитория: актуальна ли информация на нём, нет ли чего-то нового, что поменялось, и так далее. Запуск git status на нашем свежесозданном репозитории должен выдать:</p>
+    <pre>
+        $ git status
+        On branch master
+        Initial commit
+        Untracked files:
+        (use "git add ..." to include in what will be committed)
+        hello.txt
+    </pre>
+</div>
+
+
+<div class="item">
+        <h3>Подготовка файлов</h3>
+        <p>Если нужно добавить все, что находится в директории, мы можем использовать</p>
+    <pre>
+        $ git add -A
+    </pre>
+    <p>Если нужно добавить один файл</p>
+    <pre>
+        $ git add file.txt
+    </pre>
+</div>
+
+<div class="item">
+        <h3>Коммит(фиксация изменений)</h3>
+        <p>Ключ -m и сообщение — это созданное пользователем описание </p>
+    <pre>
+        $ git commit -m "Initial commit."
+    </pre>
+</div>
+
+<div class="item">
+        <h3>Подключение к удаленному репозиторию</h3>
+        <p>Обычно главный репозиторий называется origin.</p>
+    <pre>
+        $ git remote add origin URL
+    </pre>
+</div>
+
+<div class="item">
+        <h3>Отправка изменений на сервер</h3>
+        <p>Имеет два параметра: имя удаленного репозитория (origin) и ветку (master)</p>
+    <pre>
+        $ git push origin master
+    </pre>
+</div>
+
+<div class="item">
+        <h3>Клонирование репозитория</h3>
+        <p>Новый локальный репозиторий</p>
+    <pre>
+        $ git clone URL 
+    </pre>
+</div>
+
+<div class="item">
+        <h3>Запрос изменений с сервера</h3>
+        <p>Имеет два параметра: имя удаленного репозитория (origin) и ветку (master)</p>
+    <pre>
+        $ git pull origin master 
+    </pre>
+</div>
+
+<div class="item">
+        <h3>Ветвление</h3>
+        <p>Ветви имеют свою собственную историю и изолированные друг от друга изменения до тех пор, пока вы не решаете слить изменения вместе. </p>
+        <p>Активная ветка помечена звездочкой</p>
+
+    <pre>
+        $ git branch
+        * master
+    </pre>
+            </div>
+
+<div class="item">
+        <h3>Создание новой ветки</h3>
+        <p>Чтобы создать еще одну ветку, используем команду branch name</p>
+    <pre>
+        $ git branch new_branch_name 
+    </pre>
+</div>
+
+<div class="item">
+        <h3>Переключение между ветками</h3>
+        <p>Для переключения команда checkout</p>
+    <pre>
+        $ git checkout new_branch_name 
+    </pre>
+</div>
+
+<div class="item">
+        <h3>Слияние веток</h3>
+        <p>В ветке new_branch_name создан новый файл file.txt</p>
+    <pre>
+        $ git add file.txt
+        $ git commit -m "New feature complete.” 
+    </pre>
+    
+    <p>Изменения завершены, теперь мы можем переключиться обратно на ветку master.</p>
+    
+    <pre>
+        $ git checkout master
+    </pre>
+    
+    <p>Чтобы file.txt появился в ветке master, нужно воспользоваться merge для объединения веток (применения изменений из ветки new_branch_name к основной версии проекта).</p>
+    
+    <pre>
+        $ git merge new_branch_name
+    </pre>
+
+    <p>Теперь ветка master актуальна. Ветка new_branch_name больше не нужна, и ее можно удалить.</p>
+
+    <pre>
+        $ git branch -d new_branch_name
+    </pre>
+    
+</div>
+
+<div class="item">
+        <h3>Отслеживание изменений, сделанных в коммитах</h3>
+        <p>У каждого коммита есть свой уникальный идентификатор</p>
+    <pre>
+        $ git log
+        commit 1bf94010b3e9aa5214fdeceb29b0dd37e45ff61b (HEAD -> master, origin/master)
+        Author: Andrey
+    </pre>
+
+    <p>Чтобы посмотреть, что нового появилось в коммите, мы можем воспользоваться командой show [первых нескольких символов commit]</p>
+
+    <pre>
+        $ git show 1bf9
+        commit 1bf94010b3e9aa5214fdeceb29b0dd37e45ff61b (HEAD -> master, origin/master)
+    </pre>
+
+    <p>Чтобы увидеть разницу между двумя коммитами, используется команда diff (с указанием промежутка между коммитами):</p>
+
+    <pre>
+        $ git diff 09bd8cc..ba25c0ff
+    </pre>
+</div>
+
+<div class="item">
+        <h3>Возвращение файла к предыдущему состоянию</h3>
+        <p>Гит позволяет вернуть выбранный файл к состоянию на момент определенного коммита. Это делается уже знакомой нам командой checkout, которую мы ранее использовали для переключения между ветками. Но она также может быть использована для переключения между коммитами (это довольно распространенная ситуация для Гита — использование одной команды для различных, на первый взгляд, слабо связанных задач).</p>
+    <pre>
+        $ git checkout 09bd8cc1 hello.txt
+    </pre>
+</div>
+
+<div class="item">
+        <h3>Исправление коммита</h3>
+        <p>Самый последний коммит может быть доступен по алиасу HEAD:</p>
+    <pre>
+        $ git revert HEAD
+    </pre>
+
+    <p>Для остальных будем использовать идентификаторы:</p>
+
+    <pre>
+        $ git revert b10cc123
+    </pre>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <p><a href="https://proglib.io/p/git-for-half-an-hour/">Источник</a></p>
+    </div>
+    
+</body>
+</html>
